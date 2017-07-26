@@ -1,0 +1,54 @@
+<html ng-app="todoApp">
+    <head><title>Todo List</title>
+        <link href="bootstrap.css" rel="stylesheet">
+        <script src="angular.js"></script>
+        <script src="todo.js"></script>
+        <link rel="stylesheet" href="todo.css">
+       
+        
+    </head>
+    <body>
+        <div ng-controller="todoctrl as todo">
+            
+            <center><h1 class="text-info" style="font-family: Brush Script MT; font-size:50px">Todo List</h2></center>
+            <div class="alert-info"> <h4>{{todo.left}} of {{todo.totalindex}} tasks left.</h4></div>
+            <div class="row">
+                
+                <div class="col-xs-12 col-sm-6" >
+                    <input type="text" class="form-control" style="height:8%" ng-model="todo.task">
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    
+             <!--       <button ng-if="!todo.editmode" class="btn btn-success btn-block" ng-click="todo.Add()">Add Task</button>-->
+                    <button ng-if="!todo.editmode" class="btn btn-success btn-block  btn-block glyphicon glyphicon-PUSHPIN" ng-click="todo.task && todo.Add()"></button>
+                    <div class="row">
+                        <div class="col-xs-6">
+                    <button ng-if="todo.editmode" class="btn btn-info btn-block btn-block glyphicon glyphicon-retweet" ng-click="todo.task && todo.Update()"></button>
+                        </div><div class="col-xs-6">
+                    <button ng-if="todo.editmode" class="btn btn-Warning btn-block btn-block glyphicon glyphicon-remove-circle" ng-click="todo.Cancel()"></button>
+                    </div></div>
+                </div>
+            </div> 
+            <div class="row">
+                <div class=col-xs-12>
+                    <ul class="list-group">
+                        <li class="list-group-item-{{task.status?'success':'danger'}}" ng-repeat="task in todo.tasks track by $index">
+                            <div class="row">
+                                <div class="col-xs-6" style="padding-left: 30px">
+                                    {{$index+1}}.{{task.title}}{{todo.totalindex}}
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="btn btn-primary glyphicon glyphicon-{{task.status?'thumbs-down':'thumbs-up'}}" ng-click="todo.setStatus($index)"></button>
+                                    <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="todo.Delete($index)"></button>
+                                    <button class="btn btn-Warning  glyphicon glyphicon-edit" aria-hidden="true" ng-click="todo.Edit($index)"></button>
+                                </div>
+                            </div>
+                            
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
